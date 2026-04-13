@@ -5,10 +5,25 @@
 </head>
 <body>
 
-<h1>🎉 Website is live!</h1>
-<p>This is your homepage.</p>
+<h1 id="headline">Loading...</h1>
+<p id="description"></p>
 
+<br>
 <a href="admin.html">Go to Admin Panel</a>
+
+<script>
+window.onload = function () {
+  const data = JSON.parse(localStorage.getItem("siteContent"));
+
+  if (data) {
+    document.getElementById("headline").innerText = data.headline;
+    document.getElementById("description").innerText = data.description;
+  } else {
+    document.getElementById("headline").innerText = "No content yet";
+    document.getElementById("description").innerText = "Use admin panel to add content";
+  }
+};
+</script>
 
 </body>
 </html>
