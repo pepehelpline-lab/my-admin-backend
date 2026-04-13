@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+</head>
+<body>
+
+<h2>Admin Panel</h2>
+
+<input id="headline" placeholder="Headline" />
+<br><br>
+
+<textarea id="description" placeholder="Description"></textarea>
+<br><br>
+
+<button onclick="saveData()">Save</button>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  projectId: "YOUR_PROJECT_ID",
+  authDomain: "YOUR_PROJECT.firebaseapp.com"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.saveData = async function () {
+  await setDoc(doc(db, "content", "main"), {
+    headline: document.getElementById("headline").value,
+    description: document.getElementById("description").value
+  });
+
+  alert("Saved successfully!");
+};
+</script>
+
+</body>
+</html>
